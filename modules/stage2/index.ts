@@ -1,6 +1,7 @@
 import {UBA} from "../../index";
 import express from 'express';
 import {GuildMember, MessageEmbed} from 'discord.js';
+import {env} from 'process';
 
 import {
     On,
@@ -87,8 +88,8 @@ export abstract class Stage2 {
 
         this._exp.use(express.static(`${__dirname}/web/static`))
 
-        this._exp.listen(UBA.config.webserver_port)
-        console.log(`🚀 Webserver listening on port ${UBA.config.webserver_port}`)
+        this._exp.listen(env.PORT || 80)
+        console.log(`🚀 Webserver listening on port ${env.PORT || 80}`)
     }
 }
 
