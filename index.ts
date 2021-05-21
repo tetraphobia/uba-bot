@@ -1,4 +1,5 @@
 import { Client } from '@typeit/discord';
+import env from 'process';
 
 interface Config {
     token: string,
@@ -9,7 +10,14 @@ interface Config {
 
 
 export class UBA {
-    private static _config: Config = require(`${__dirname}/config.json`);
+    // Uncomment to use local config rather than env.
+    // private static _config: Config = require(`${__dirname}/config.json`);
+    private static _config: Config = {
+        token: env.DIS_TOKEN,
+        modules_enabled: ["stage1", "stage2"],
+        prefix: env.PREFIX,
+        webserver_port: env.PORT,
+    }
     private static _client: Client;
 
     static get Client(): Client { return this._client }
