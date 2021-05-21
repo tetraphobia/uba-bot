@@ -1,5 +1,5 @@
 import { Client } from '@typeit/discord';
-import env from 'process';
+import process from 'process';
 
 interface Config {
     token: string,
@@ -13,13 +13,10 @@ export class UBA {
     // Uncomment to use local config rather than env.
     // private static _config: Config = require(`${__dirname}/config.json`);
     private static _config: Config = {
-        // @ts-ignore
-        token: env.DIS_TOKEN,
+        token: process.env.DIS_TOKEN,
         modules_enabled: ["stage1", "stage2"],
-        // @ts-ignore
-        prefix: env.PREFIX,
-        // @ts-ignore
-        webserver_port: env.PORT,
+        prefix: process.env.PREFIX,
+        webserver_port: Number(process.env.PORT) || 80,
     }
     private static _client: Client;
 
@@ -28,6 +25,7 @@ export class UBA {
 
     static start(): void {
         this._client = new Client();
+        console.log(this._config)
         this._client.login(
             UBA.config.token,
             `${__dirname}/client/*.ts`
