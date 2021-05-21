@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'Rune';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Rune'), url('rune.woff') format('woff');
+}
+
+
+body, html {
+    background: linear-gradient(140deg, rgba(31,35,43,1) 0%, rgb(32, 41, 54) 35%, rgba(11,12,15,1) 100%);
+    display: inline-flex;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+
+form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+svg {
+    height: 300px;
+    width: 300px;
+}
+
+input, #message {
+    font-family: 'Rune', monospace;
+    flex: 1;
+    border: none;
+    border-radius: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 38px;
+    background-color: transparent;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    outline: none !important;
+}
