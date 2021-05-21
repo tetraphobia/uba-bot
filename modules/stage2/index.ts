@@ -19,7 +19,7 @@ const createSuccessEmbed = () =>
         We've prepared one of our many voids for you to scream into. Go now, and scream into it.
         `)
         .addFields({
-            name: 'The Void', value: 'https://alinktothething.com/thisdoesnotexistyet'
+            name: 'The Void', value: 'https://ancient-refuge-96788.herokuapp.com/'
         })
         .setAuthor('/tmp/the_gauntlet/stage1/')
         .setFooter('Use the !restart command to restart the trial.', 'https://iconic.app/icons/iconic/png/white/information.png')
