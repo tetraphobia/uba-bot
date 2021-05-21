@@ -13,9 +13,12 @@ export class UBA {
     // Uncomment to use local config rather than env.
     // private static _config: Config = require(`${__dirname}/config.json`);
     private static _config: Config = {
+        // @ts-ignore
         token: env.DIS_TOKEN,
         modules_enabled: ["stage1", "stage2"],
+        // @ts-ignore
         prefix: env.PREFIX,
+        // @ts-ignore
         webserver_port: env.PORT,
     }
     private static _client: Client;
