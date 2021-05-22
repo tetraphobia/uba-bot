@@ -53,7 +53,19 @@ async function promote(member: GuildMember): Promise<void> {
 
 export abstract class Stage2 {
     private static _exp = express();
+    private static _timestamp = 0;
+    private static _timeoutMessageSent = false;
+
     static get exp(){return this._exp};
+
+    static get timeoutMessageSent() {return this._timeoutMessageSent}
+    static set timeoutMessageSent(a: boolean) {this._timeoutMessageSent = a}
+
+    static set timestamp(timestamp: number){
+        this._timestamp = timestamp
+    }
+    static get timestamp() {return this._timestamp}
+    static get isTimedOut(): boolean {return (Date.now() - this.timestamp) < 2000}
 
     @On('stageOneSuccess' as any)
     async stagePassed([channel]): Promise<void>{
@@ -62,7 +74,7 @@ export abstract class Stage2 {
 
     @On('post_request' as any)
     async validate([discordid, key]): Promise<void>{
-        const keyTest = Buffer.from(String(Date.parse(String(new Date))).substr(0, 8) + 'ligma').toString('base64')
+        const keyTest = Buffer.from(String(Date.parse(String(new Date))).substr(0, 7) + 'ligma').toString('base64')
 
         if(key === keyTest){
             let guild = await UBA.Client.guilds.cache.first()
@@ -76,13 +88,27 @@ export abstract class Stage2 {
         this._exp.use(express.json())
 
         this._exp.get('/', (req, res) => {
+            console.log(this.isTimedOut ?
+                `Timed out message: ${req.query.scream}` :
+                `Sending message: ${req.query.scream}`
+            )
+            if (!this.isTimedOut) {
+                this.timeoutMessageSent = false
+            }
+            if (this.isTimedOut && !this.timeoutMessageSent){
+                console.log(this.timeoutMessageSent)
+                UBA.Client.emit('query_scream', req.query, true)
+                this.timeoutMessageSent = true
+            }
+            if (req.query.scream && !this.isTimedOut) UBA.Client.emit('query_scream', req.query)
             res.sendFile(`${__dirname}/web/index.html`)
+            this.timestamp = Date.now()
         })
 
         this._exp.post('/validate', (req, res) => {
-            if (req.body.discordid && req.body.key){
+            if (req.body.discordid && req.body.key && !this.isTimedOut){
                 const {discordid, key} = req.body
-                UBA.Client.emit('post_request', discordid, key)
+                UBA.Client.emit('post_request', discordid, key, req)
             }
 	    res.sendStatus(200);
         })

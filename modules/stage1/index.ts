@@ -61,13 +61,14 @@ export abstract class Stage1 {
 
     @On('message')
     async messageRecieved([message]: ArgsOf<'message'>): Promise<void> {
+        let originalMessage = message;
         if (message.author.bot) return;
 
         if (message.channel.type == "dm") {
             let response = message.content;
 
             message.channel.messages.fetch({limit: 100})
-                .then(messages => messages.find(user => user.author.username === "/usr/bin/abot_x86_64"))
+                .then(messages => messages.find(user => user.author.id === "845150870383624223"))
                 .then(message => {
                     if(message.embeds[0]){
                         const hash = message.embeds[0].fields[0].value
@@ -75,12 +76,13 @@ export abstract class Stage1 {
 
                         if (hash === responseHash){
                             if(UBA.config.modules_enabled.includes('stage2')) {
+                                UBA.Client.emit('hash_attempt', originalMessage.author, hash, response)
                                 UBA.Client.emit('stageOneSuccess', message.channel)
                             } else {
                                 message.channel.send('Stage 2 is not enabled unfortunately')
                             }
                         }
-                    } else {return}
+                    } else return;
                 })
         }
     }
