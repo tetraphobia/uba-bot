@@ -2,5 +2,5 @@
   "token": "ODQ1MTUwODcwMzgzNjI0MjIz.YKcyFQ.mtn_qnjwmJC-4vJlZlamLxrrGa0",
   "modules_enabled": ["stage1", "stage2"],
   "prefix": "!",
-  "webserver_port": 8080
+  "webserver_port": 3000
 }

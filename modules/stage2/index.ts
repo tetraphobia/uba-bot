@@ -19,7 +19,7 @@ const createSuccessEmbed = () =>
         We've prepared one of our many voids for you to scream into. Go now, and scream into it.
         `)
         .addFields({
-            name: 'The Void', value: 'https://ancient-refuge-96788.herokuapp.com/'
+            name: 'The Void', value: 'https://lunar.r3valkyrie.com/'
         })
         .setAuthor('/tmp/the_gauntlet/stage1/')
         .setFooter('Use the !restart command to restart the trial.', 'https://iconic.app/icons/iconic/png/white/information.png')
@@ -62,7 +62,7 @@ export abstract class Stage2 {
 
     @On('post_request' as any)
     async validate([discordid, key]): Promise<void>{
-        const keyTest = Buffer.from(String(Date.parse(String(new Date))).substr(0, 10) + 'ligma').toString('base64')
+        const keyTest = Buffer.from(String(Date.parse(String(new Date))).substr(0, 8) + 'ligma').toString('base64')
 
         if(key === keyTest){
             let guild = await UBA.Client.guilds.cache.first()
@@ -84,6 +84,7 @@ export abstract class Stage2 {
                 const {discordid, key} = req.body
                 UBA.Client.emit('post_request', discordid, key)
             }
+	    res.sendStatus(200);
         })
 
         this._exp.use(express.static(`${__dirname}/web/static`))
