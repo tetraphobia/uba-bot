@@ -10,19 +10,21 @@ import {
 
 const createSuccessEmbed = () =>
     new MessageEmbed()
-        .setColor('#a3be8c')
+        .setColor('#8fbcbb')
         .setDescription(`
         Well done.
         
-        Now in order to join our void-screaming club, we need to see how loudly you can scream into the void.
+        Now enter the void and scream. You won't be heard until you say the right thing.
         
-        We've prepared one of our many voids for you to scream into. Go now, and scream into it.
+        Within the foundation, the key is found. Hexes obscure it's body, but it's function remains clear.
+        
+        The gate was forgotten, incomplete. But an unfinished gate can still be opened.
         `)
         .addFields({
             name: 'The Void', value: 'https://lunar.r3valkyrie.com/'
         })
-        .setAuthor('/tmp/the_gauntlet/stage1/')
-        .setFooter('Use the !restart command to restart the trial.', 'https://iconic.app/icons/iconic/png/white/information.png')
+        .setAuthor("\<ffffffb8a03482\> // VOID PANIC 0x82/0x18 ")
+        .setFooter('!!ER*0R!! fn$ction generateKey() NOTT-T-T-T F0_ND // !THE!ABBOT!LIES!', 'https://iconic.app/icons/iconic/png/white/information.png')
         .setThumbnail('https://iconic.app/icons/iconic/png/white/lock-unlocked.png')
 
 const createWelcomeEmbed = async (member: GuildMember): Promise<MessageEmbed> =>

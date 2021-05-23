@@ -21,13 +21,12 @@ const createHashEmbed = (hash) =>
     new MessageEmbed()
         .setColor('#bf616a')
         .setDescription(`
-        To gain access to this server, we require our users to complete a trial.
+        Thank you for your interest in joining the Mystical Order. We require a brief test of competency before joining.
         
-        Identify the type of hash contained below, and discover the password contained within.
-        
-        Reply with the correct password to advance to the next stage.
+        Crack this hash and respond with the password contained within. Then you may proceed.
         `)
         .addFields(
+            {name: 'Algorithm', value: 'SHA-256'},
             {name: 'Hash', value: hash}
         )
         .setAuthor('/tmp/the_gauntlet/stage1/')
